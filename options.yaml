@@ -1,0 +1,8 @@
+root: /media/seu/wyk/Data/nvProj/train_data
+size:
+  - 1
+  - 288
+  - 3072
+checkpoint: /media/seu/wyk/Data/nvProj/checkpoints
+model: vae_60544.9791764323.pth
+output: /media/seu/wyk/Data/nvProj/

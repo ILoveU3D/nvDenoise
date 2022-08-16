@@ -5,13 +5,11 @@ class Pix2PixHD(nn.Module):
     def __init__(self, features = 32):
         super(Pix2PixHD, self).__init__()
         self.G11 = nn.Sequential(
-            nn.Conv2d(1, features, kernel_size=3,stride=(2,2),padding=1),
+            nn.Conv2d(1, features * 2, kernel_size=3,stride=(2,2),padding=1),
             nn.ReLU(True),
         )
         self.G21 = nn.Sequential(
-            nn.Conv2d(1, features, kernel_size=3,stride=(2,2),padding=1),
-            nn.ReLU(True),
-            nn.Conv2d(features, features * 2, kernel_size=3, stride=(2, 2), padding=1),
+            nn.Conv2d(1, features * 2, kernel_size=3,stride=(2,2),padding=1),
             nn.ReLU(True),
         )
         self.G22 = nn.Sequential(
@@ -33,15 +31,13 @@ class Pix2PixHD(nn.Module):
             nn.ReLU(True),
         )
         self.G25 = nn.Sequential(
-            nn.ConvTranspose2d(features * 2, features, kernel_size=3, stride=(2, 2), padding=0),
-            nn.ReLU(True),
-            nn.ConvTranspose2d(features, features, kernel_size=2, stride=(2, 2), padding=1),
+            nn.ConvTranspose2d(features * 2, features * 2, kernel_size=2, stride=(2, 2), padding=0),
             nn.ReLU(True),
         )
         self.G12 = nn.Sequential(
-            nn.ConvTranspose2d(features, 1, kernel_size=2, stride=(2, 2), padding=0),
+            nn.ConvTranspose2d(features * 2, features, kernel_size=2, stride=(2, 2), padding=0),
             nn.ReLU(True),
-            nn.Conv2d(1, 1, kernel_size=1, padding=0),
+            nn.Conv2d(features, 1, kernel_size=1, padding=0),
             nn.ReLU(True),
         )
         self.G31 = nn.Sequential(
@@ -59,8 +55,7 @@ class Pix2PixHD(nn.Module):
         z = self.G23(z) + z
         z = self.G24(z) + z
         z = self.G25(z)
-        x = x + z
-        return self.G12(x), self.G31(image)
+        return self.G12(x), self.G12(x+z), self.G31(image)
 
     def initiate(self):
         for m in self.modules():

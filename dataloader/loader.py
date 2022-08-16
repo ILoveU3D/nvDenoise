@@ -2,6 +2,7 @@ import os
 import torch
 import numpy as np
 from torch.utils.data import Dataset
+from torchvision.transforms import transforms
 from options import root, size
 
 class NoiseSet(Dataset):
@@ -12,6 +13,7 @@ class NoiseSet(Dataset):
             for item in os.listdir(os.path.join(root, dir, "noise")):
                 self.items.append({"noise":os.path.join(root, dir, "noise", item),
                                    "clean":os.path.join(root, dir, "clean", clean)})
+        self.normalization = transforms.Normalize(0, 1)
 
     def __getitem__(self,index):
         noise = np.fromfile(self.items[index]["noise"], "float32")

@@ -4,5 +4,5 @@ size:
   - 288
   - 3072
 checkpoint: /media/seu/wyk/Data/nvProj/checkpoints
-model: vae_60544.9791764323.pth
+model: vae_4_1996.6390321350.pth
 output: /media/seu/wyk/Data/nvProj/

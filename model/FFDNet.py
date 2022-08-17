@@ -13,22 +13,10 @@ class FFDNet(nn.Module):
             nn.Conv2d(features, features, kernel_size=3, padding=1),
             nn.BatchNorm2d(features),
             nn.ReLU(),
-            nn.Conv2d(features, features, kernel_size=3, padding=1),
-            nn.BatchNorm2d(features),
-            nn.ReLU(),
-            nn.Conv2d(features, features, kernel_size=3, padding=1),
-            nn.BatchNorm2d(features),
-            nn.ReLU(),
             nn.Conv2d(features, 1, kernel_size=3, padding=1),
         )
         self.DnCNN_L = nn.Sequential(
             nn.Conv2d(1, features, kernel_size=3, padding=1),
-            nn.ReLU(),
-            nn.Conv2d(features, features, kernel_size=3, padding=1),
-            nn.BatchNorm2d(features),
-            nn.ReLU(),
-            nn.Conv2d(features, features, kernel_size=3, padding=1),
-            nn.BatchNorm2d(features),
             nn.ReLU(),
             nn.Conv2d(features, features, kernel_size=3, padding=1),
             nn.BatchNorm2d(features),
@@ -48,12 +36,6 @@ class FFDNet(nn.Module):
             nn.Conv2d(features, features, kernel_size=3, padding=1),
             nn.BatchNorm2d(features),
             nn.ReLU(),
-            nn.Conv2d(features, features, kernel_size=3, padding=1),
-            nn.BatchNorm2d(features),
-            nn.ReLU(),
-            nn.Conv2d(features, features, kernel_size=3, padding=1),
-            nn.BatchNorm2d(features),
-            nn.ReLU(),
             nn.Conv2d(features, 1, kernel_size=3, padding=1),
         )
 
@@ -62,6 +44,6 @@ class FFDNet(nn.Module):
         l = self.DnCNN_L(image)
         v = image - v
         l = image * l
-        t = torch.concat([v,l], dim=1)
+        t = torch.cat([v,l], dim=1)
         t = self.DnCNN_F(t)
         return v - t

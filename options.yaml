@@ -1,8 +1,8 @@
-root: /media/seu/wyk/Data/nvProj/train_data
+root: /home/nv/mcl/data/denoise/20220811/train_data
 size:
   - 1
   - 288
   - 3072
-checkpoint: /media/seu/wyk/Data/nvProj/checkpoints
-model: vae_4_1996.6390321350.pth
-output: /media/seu/wyk/Data/nvProj/
+checkpoint: /home/nv/mcl/data/denoise/20220811/checkpoint
+model: vae_90_3640.6646972656.pth
+output: /home/nv/mcl/data/denoise/20220811/test_data

@@ -2,7 +2,7 @@ import numpy as np
 import torch
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from torchsummary import summary
+# from torchsummary import summary
 from visdom import Visdom
 from dataloader.loader import NoiseSet
 from model.Pix2PixHD import Pix2PixHD
@@ -10,7 +10,7 @@ from model.FFDNet import FFDNet
 from options import checkpointPath
 
 trainSet = NoiseSet()
-trainLoader = DataLoader(trainSet, batch_size=4, shuffle=True)
+trainLoader = DataLoader(trainSet, batch_size=26, shuffle=True)
 net = FFDNet().cuda()
 # summary(net, (1, 288, 3072))
 optimizer = torch.optim.Adam(net.parameters(), lr=10e-4)

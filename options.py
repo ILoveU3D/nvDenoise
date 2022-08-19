@@ -2,7 +2,8 @@ import yaml
 import os
 y = yaml.load(open("options.yaml"), yaml.FullLoader)
 
-root = y["root"]
+trainRoot = y["root"][0]
+validRoot = y["root"][1]
 size = y["size"]
 checkpointPath = y["checkpoint"]
 model = None

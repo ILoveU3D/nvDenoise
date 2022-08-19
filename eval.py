@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import torchvision.transforms
 
-from options import checkpointPath, model, outputPath, size, root
+from options import checkpointPath, model, outputPath, size
 
 net = torch.load(os.path.join(checkpointPath, model))
 net.eval()

@@ -3,10 +3,10 @@ import torch
 import numpy as np
 from torch.utils.data import Dataset
 from torchvision.transforms import transforms
-from options import root, size
+from options import size
 
 class NoiseSet(Dataset):
-    def __init__(self):
+    def __init__(self, root):
         self.items = []
         for dir in os.listdir(root):
             clean = os.listdir(os.path.join(root, dir, "clean"))[0]
